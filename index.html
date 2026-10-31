@@ -122,7 +122,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 .price{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:13px;align-items:baseline;margin:0}
 .price dt{color:var(--muted)} .price dd{margin:0;text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
 .price .total dt{color:var(--ink);font-weight:700} .price .total dd{font-size:22px;font-weight:600;color:var(--ink)}
-.sub{display:block;font-size:11px;color:var(--muted)}
+.subnote{display:block;font-size:11px;color:var(--muted)}
 .eta{font-size:13px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .card .btn{margin-top:auto;justify-content:center}
 .note{font-size:12px;color:var(--muted)}
@@ -157,6 +157,15 @@ textarea{min-height:110px}
 .timeline{display:grid;grid-template-columns:auto 1fr auto;gap:6px 10px;font-size:13px;align-items:center}
 .timeline i{width:10px;height:10px;border-radius:50%;background:var(--indigo);display:block}
 .timeline .d{font-family:var(--mono);color:var(--muted);font-size:12px;white-space:nowrap}
+.gal figure{margin:0;background:#0b1217}
+.gal img#gal-main{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;max-width:100%}
+.gal figcaption{font-size:12px;color:var(--muted);padding:8px 12px;background:var(--surface)}
+.gal-thumbs{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;padding:0 12px 12px}
+.gal-thumbs button{padding:0;border:2px solid transparent;border-radius:8px;overflow:hidden;cursor:pointer;background:none;aspect-ratio:4/3}
+.gal-thumbs button[aria-pressed="true"]{border-color:var(--indigo)}
+.gal-thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.facts{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:13px;margin:0}
+.facts dt{color:var(--muted)} .facts dd{margin:0}
 footer{border-top:1px solid var(--line);margin-top:72px;padding-block:28px 48px;font-size:13px;color:var(--muted)}
 footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
@@ -252,7 +261,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
     </div>
     <div class="strip" id="assumptions"></div>
     <div id="stock" class="grid"></div>
-    <p class="note" style="margin-top:16px">Demo listing. Vehicles, equipment and prices are sample estimates for 2021 models with 30,000–50,000 km. Photos are illustrative.</p>
+    <p class="note" style="margin-top:16px">Demo listing. Vehicles, equipment and prices are sample estimates for 2021 models with 30,000–50,000 km. The Toyota Roomy is a real car in stock at Douou Jidosha; its Malta price is an estimate. Other cars are samples with illustrative photos.</p>
   </section>
 
   <section data-view="food" hidden>
@@ -299,12 +308,17 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
       <div class="viewer" id="viewer"><div class="fallback" id="viewer-fallback">Loading…</div>
         <div class="hud"><span>360° interior</span><span>Drag to look around</span></div>
       </div>
+      <div class="gal" id="gal" hidden>
+        <figure><img id="gal-main" alt=""><figcaption id="gal-cap"></figcaption></figure>
+        <div class="gal-thumbs" id="gal-thumbs"></div>
+      </div>
     </div>
     <div class="dside">
       <button class="close" id="close" type="button">Close ✕</button>
       <h3 id="d-title"></h3>
       <div class="meta" id="d-meta"></div>
       <div><div class="note" style="font-weight:700;margin-bottom:6px">Key equipment</div><ul class="chips" id="d-equip"></ul></div>
+      <dl class="facts" id="d-facts" hidden></dl>
       <table class="sheet" id="d-sheet"></table>
       <div><div class="note" style="font-weight:700;margin-bottom:6px">If you order today</div><div class="timeline" id="d-timeline"></div></div>
       <p class="note">Your payment is held by a lawyer in Malta and released to Hosokawa Pte. Ltd. only after the car ships.</p>
@@ -329,6 +343,10 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
   $("#assumptions").innerHTML = `Japan → Malta <b>${SHIP[0]+SEA[0]}–${SHIP[1]+SEA[1]} days</b>　SVA inspection <b>€${A.sva}</b>　Local fees <b>€${A.local}</b>　VAT <b>18%</b>`;
 
   const vehicles = [
+    {id:"roomy", real:true, photos:[["front","Front"],["rear","Rear"],["dash","Dashboard"],["camera","Reversing camera"],["rear-seats","Rear seats"],["cargo","Cargo area"],["underbody","Underbody"]],
+     equip:["4WD","Panasonic Strada navigation","Reversing camera","Collision-avoidance braking (Smart Assist)","Sliding rear doors","CVT automatic","5 seats","Cold-climate spec (Hokkaido car)"],
+     name:"Toyota Roomy", code:"1.0 G 4WD", year:2024, km:19000, grade:"Black mica · no accident history", fobJpy:1880000, freightEur:1650, regTaxEur:900, marketEur:21500, status:"available",
+     facts:[["First registered","2024"],["Mileage","19,000 km"],["Engine","1.0 L petrol, CVT"],["Drive","4WD"],["Seats / doors","5 / 5"],["Colour","Black mica metallic"],["Accident history","None"],["Japanese inspection valid to","Aug 2027"],["Dealer warranty in Japan","To Aug 2027 or 60,000 km"],["Location","Douou Jidosha, Chitose, Hokkaido"]]},
     {id:"aqua", pos:"15% 75%", equip:["Hybrid system","Reversing camera","Toyota Safety Sense","Adaptive cruise control","Smart key, push start","LED headlights","Bluetooth audio","Air conditioning"], name:"Toyota Aqua", code:"MXPK", year:2021, km:38000, grade:"Hybrid", fobJpy:1100000, freightEur:1650, regTaxEur:900, marketEur:16000, status:"available"},
     {id:"note", pos:"72% 58%", equip:["e-POWER drive","Reversing camera","Emergency braking","Lane departure warning","Smart key, push start","LED headlights","Bluetooth audio","Auto air conditioning"], name:"Nissan Note e-POWER", code:"E13", year:2021, km:41000, grade:"e-POWER hybrid", fobJpy:950000, freightEur:1700, regTaxEur:850, marketEur:14500, status:"available"},
     {id:"mazda2", pos:"88% 12%", equip:["Mazda Connect (English menu)","Reversing camera","Emergency braking","Blind spot monitoring","Smart key, push start","LED headlights","Cruise control","Auto air conditioning"], name:"Mazda 2 / Demio", code:"DJ", year:2021, km:35000, grade:"Petrol", fobJpy:850000, freightEur:1700, regTaxEur:1150, marketEur:13400, status:"reserved"},
@@ -341,19 +359,19 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
     const d = dates();
     const list = vehicles.filter(v=>v.status!=="sold").concat(vehicles.filter(v=>v.status==="sold"));
     $("#stock").innerHTML = list.map(v => { const c = calc(v); return `<article class="card">
-      <div class="thumb"><img src="img/garage.jpg" alt="" style="object-position:${v.pos};transform:scale(1.9);transform-origin:${v.pos}">
-        <span class="badge s-${v.status}">${STATUS[v.status]}</span><span class="chip360">360°</span>
+      <div class="thumb">${v.photos?`<img src="img/roomy/${v.photos[0][0]}.jpg" alt="${esc(v.name)}, front view">`:`<img src="img/garage.jpg" alt="" style="object-position:${v.pos};transform:scale(1.9);transform-origin:${v.pos}">`}
+        <span class="badge s-${v.status}">${STATUS[v.status]}</span><span class="chip360">${v.photos?v.photos.length+" photos":"360°"}</span>
         <div class="plate"><b>${esc(v.name)}</b><span style="font-family:var(--mono);font-size:12px">${esc(v.code)}</span></div></div>
       <div class="body">
-        <div class="meta">${metaOf(v)} · Sample</div>
+        <div class="meta">${metaOf(v)} · ${v.real?"<b style=\"color:var(--good)\">In stock at Douou</b>":"Sample"}</div>
         <ul class="chips">${v.equip.slice(0,3).map(e=>`<li>${esc(e)}</li>`).join("")}<li>+${v.equip.length-3} more</li></ul>
         <dl class="price">
-          <dt>Car price, landed in Malta<span class="sub">Paid into escrow · incl. duty and VAT</span></dt><dd>${eur(c.sale)}</dd>
-          <dt>Registration costs (est.)<span class="sub">Paid by you in Malta</span></dt><dd>${eur(c.reg)}</dd>
+          <dt>Car price, landed in Malta<span class="subnote">Paid into escrow · incl. duty and VAT</span></dt><dd>${eur(c.sale)}</dd>
+          <dt>Registration costs (est.)<span class="subnote">Paid by you in Malta</span></dt><dd>${eur(c.reg)}</dd>
           <div class="total" style="display:contents"><dt>Total on the road</dt><dd>${eur(c.market)}</dd></div>
         </dl>
         <div class="eta">Arrives <b>${fmtShort(d.arrFrom)} – ${fmtShort(d.arrTo)}</b> · Ready to drive <b>${fmtShort(d.roadFrom)} – ${fmtShort(d.roadTo)}</b></div>
-        <button class="btn" type="button" data-open="${v.id}" ${v.status==="sold"?"disabled":""}>${v.status==="sold"?"Sold":"Cost breakdown and 360° interior"}</button>
+        <button class="btn" type="button" data-open="${v.id}" ${v.status==="sold"?"disabled":""}>${v.status==="sold"?"Sold":(v.photos?"Photos, details and cost breakdown":"Cost breakdown and 360° interior")}</button>
       </div></article>`; }).join("");
   }
   $("#stock").addEventListener("click", ev => { const b = ev.target.closest("[data-open]"); if (b) openDetail(b.dataset.open); });
@@ -367,7 +385,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
     $("#"+kind+"-grid").innerHTML = goods[kind].map(g => `<article class="card">
       <div class="thumb"><img src="img/crafts.jpg" alt="" style="object-position:${g.pos};transform:scale(2.2);transform-origin:${g.pos}"><span class="badge s-reserved">Sample</span><div class="plate"><b>${esc(g.name)}</b></div></div>
       <div class="body"><div class="meta">${esc(g.meta)}</div>
-        <dl class="price"><div class="total" style="display:contents"><dt>Delivered in Malta<span class="sub">${g.price>=1000?"Paid into escrow":"Pay by card"} · incl. shipping, duty and VAT</span></dt><dd>${eur(g.price)}</dd></div></dl>
+        <dl class="price"><div class="total" style="display:contents"><dt>Delivered in Malta<span class="subnote">${g.price>=1000?"Paid into escrow":"Pay by card"} · incl. shipping, duty and VAT</span></dt><dd>${eur(g.price)}</dd></div></dl>
         <div class="eta">Delivered <b>${fmtShort(addDays(days[0]))} – ${fmtShort(addDays(days[1]))}</b></div>
         <button class="btn" type="button" disabled>Ordering opens soon</button></div></article>`).join("");
   }
@@ -391,6 +409,17 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
       `<i></i><b>Estimated arrival in Malta</b><span class="d">${fmt(d.arrFrom)} – ${fmt(d.arrTo)}</span>`+
       `<i></i><span>Customs, registration and plates</span><span class="d">${REG[0]}–${REG[1]} days</span>`+
       `<i style="background:var(--good)"></i><b>Ready to drive</b><span class="d">${fmt(d.roadFrom)} – ${fmt(d.roadTo)}</span>`;
+    const gal=$("#gal"), viewer=$("#viewer"), facts=$("#d-facts");
+    if (v.photos){
+      viewer.hidden=true; gal.hidden=false; if (pano) pano.stop();
+      const show=i=>{ const [f,c]=v.photos[i]; $("#gal-main").src="img/roomy/"+f+".jpg"; $("#gal-main").alt=v.name+": "+c; $("#gal-cap").textContent=c+" · photo by Douou Jidosha"; [...$("#gal-thumbs").children].forEach((b,j)=>b.setAttribute("aria-pressed",j===i)); };
+      $("#gal-thumbs").innerHTML=v.photos.map(([f,c],i)=>`<button type="button" aria-label="${esc(c)}" data-i="${i}"><img src="img/roomy/${f}.jpg" alt=""></button>`).join("");
+      $("#gal-thumbs").onclick=e=>{ const b=e.target.closest("[data-i]"); if(b) show(+b.dataset.i); };
+      show(0);
+      facts.hidden=false; facts.innerHTML=v.facts.map(([a,b])=>`<dt>${esc(a)}</dt><dd>${esc(b)}</dd>`).join("");
+      $("#modal").hidden=false; $("#close").focus(); return;
+    }
+    viewer.hidden=false; gal.hidden=true; facts.hidden=true;
     $("#modal").hidden = false; showPano(); $("#close").focus();
   }
   function closeDetail(){ $("#modal").hidden = true; if (pano) pano.stop(); }
