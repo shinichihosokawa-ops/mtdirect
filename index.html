@@ -235,7 +235,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
         <ul class="checks">
           <li>Inspection record and photos shared before you pay</li>
           <li>Landed price and ready-to-drive date on every listing</li>
-          <li>We help you through SVA and registration in Malta</li>
+          <li>SVA inspection done in Japan before shipping — only cars that pass are shipped</li><li>We help you through registration in Malta</li>
         </ul>
         <a class="btn" href="#cars">See cars in stock</a>
       </div>
@@ -256,7 +256,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
       <h2>What you pay, and to whom</h2>
       <div class="payrows">
         <div><b>Held in escrow by a Maltese lawyer</b>When you order, you pay the full <strong>car price, landed in Malta</strong> into the client account of an independent advocate in Malta. It covers the car, shipping and insurance, import duty and VAT. The lawyer releases the money to the seller, Hosokawa Pte. Ltd., in one payment, only after you have received the car. If the car is not shipped on time, or cannot be registered in Malta because of a problem with the car, you get a refund.</div>
-        <div><b>Paid by you in Malta</b>The <strong>registration costs</strong> shown on each car: registration tax, SVA inspection, plates and local fees, paid directly to the Maltese authorities and providers. These are estimates and may change.</div>
+        <div><b>Paid by you in Malta</b>The <strong>registration costs</strong> shown on each car: registration tax, plates and local fees, paid directly to the Maltese authorities and providers. These are estimates and may change.</div>
       </div>
     </div>
     <div class="strip" id="assumptions"></div>
@@ -335,12 +335,12 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
   const $ = s => document.querySelector(s);
   const eur = n => "€" + Math.round(n).toLocaleString("en-GB");
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  function calc(v){ const fobEur=(v.fobJpy||0)/A.fx, cif=fobEur+(v.freightEur||0), duty=cif*A.duty, vat=(cif+duty)*A.vat, port=cif+duty+vat, reg=(v.regTaxEur||0)+A.sva+A.local, market=v.marketEur||0; return {fobEur,cif,duty,vat,port,reg,market,sale:market-reg}; }
+  function calc(v){ const fobEur=(v.fobJpy||0)/A.fx, cif=fobEur+(v.freightEur||0), duty=cif*A.duty, vat=(cif+duty)*A.vat, port=cif+duty+vat+A.sva, reg=(v.regTaxEur||0)+A.local, market=v.marketEur||0; return {fobEur,cif,duty,vat,port,reg,market,sale:market-reg}; }
   function addDays(n){ const x=new Date(); x.setDate(x.getDate()+n); return x; }
   const fmt = d => d.toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});
   const fmtShort = d => d.toLocaleDateString("en-GB",{day:"numeric",month:"short"});
   function dates(){ const a=SHIP[0]+SEA[0], b=SHIP[1]+SEA[1]; return {arrFrom:addDays(a),arrTo:addDays(b),roadFrom:addDays(a+REG[0]),roadTo:addDays(b+REG[1])}; }
-  $("#assumptions").innerHTML = `Japan → Malta <b>${SHIP[0]+SEA[0]}–${SHIP[1]+SEA[1]} days</b>　SVA inspection <b>€${A.sva}</b>　Local fees <b>€${A.local}</b>　VAT <b>18%</b>`;
+  $("#assumptions").innerHTML = `Japan → Malta <b>${SHIP[0]+SEA[0]}–${SHIP[1]+SEA[1]} days</b>　SVA inspection in Japan <b>€${A.sva}</b>　Local fees <b>€${A.local}</b>　VAT <b>18%</b>`;
 
   const vehicles = [
     {id:"roomy", real:true, photos:[["front","Front"],["rear","Rear"],["dash","Dashboard"],["camera","Reversing camera"],["rear-seats","Rear seats"],["cargo","Cargo area"],["underbody","Underbody"]],
@@ -392,7 +392,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
 
   let pano = null;
   function sheetRows(c){
-    const r=[["head","Costs up to Malta port"],["","Car price in Japan (FOB)",eur(c.fobEur)],["","Shipping and insurance",eur(c.cif-c.fobEur)],["","Import duty 10%",eur(c.duty)],["","VAT 18%",eur(c.vat)],["sub","Subtotal",eur(c.port)],["head","Registration in Malta (paid by buyer)"],["","Registration tax (est.)",eur(c.reg-A.sva-A.local)],["","SVA inspection and local fees",eur(A.sva+A.local)],["sub","Subtotal",eur(c.reg)],["big","Car price, landed in Malta",eur(c.sale)],["","Total on the road",eur(c.market)]];
+    const r=[["head","Costs up to Malta port"],["","Car price in Japan (FOB)",eur(c.fobEur)],["","Shipping and insurance",eur(c.cif-c.fobEur)],["","Import duty 10%",eur(c.duty)],["","VAT 18%",eur(c.vat)],["","SVA inspection in Japan (before shipping)",eur(A.sva)],["sub","Subtotal",eur(c.port)],["head","Registration in Malta (paid by buyer)"],["","Registration tax (est.)",eur(c.reg-A.local)],["","Plates and local fees",eur(A.local)],["sub","Subtotal",eur(c.reg)],["big","Car price, landed in Malta",eur(c.sale)],["","Total on the road",eur(c.market)]];
     return r.map(([k,a,b]) => k==="head"?`<tr class="head"><td colspan="2">${a}</td></tr>`:`<tr class="${k}"><td>${a}</td><td>${b}</td></tr>`).join("");
   }
   function openDetail(id){
