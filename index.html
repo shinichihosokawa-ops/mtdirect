@@ -208,14 +208,14 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
     <div class="proof">
       <div><b>0 dealers</b><span>between you and the source in Japan</span></div>
       <div><b>1 price</b><span>landed in Malta, shown before you order</span></div>
-      <div><b>Escrow</b><span>large orders held by a Maltese lawyer until shipping</span></div>
+      <div><b>Escrow</b><span>large orders held by a Maltese lawyer until you receive it</span></div>
       <div><b>English</b><span>support and registration help in Malta</span></div>
     </div>
 
     <div class="values">
       <div class="value"><span class="num">01 · QUALITY</span><h3>Japanese quality you can check</h3><p>Cars are inspected in Sapporo. Crafts come from workshops with generations of practice. You see photos and records before you pay.</p></div>
       <div class="value"><span class="num">02 · PRICE</span><h3>Lower price, nothing hidden</h3><p>We buy at the source with no dealer margin on top. Shipping, duty and VAT are already in the price.</p></div>
-      <div class="value"><span class="num">03 · EASE</span><h3>Simple and safe to order</h3><p>Pick it online, pay once. Orders over €1,000 stay with a Maltese lawyer until your item ships.</p></div>
+      <div class="value"><span class="num">03 · EASE</span><h3>Simple and safe to order</h3><p>Pick it online, pay once. Orders over €1,000 stay with a Maltese lawyer until you receive your item.</p></div>
     </div>
 
     <div class="sec-head"><div><span class="eyebrow">Categories · 品目</span><h2>What you can bring home from Japan</h2></div><p>Start with cars from our partner dealer in Sapporo. Crafts and food are opening soon.</p></div>
@@ -255,7 +255,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
     <div class="payinfo" role="note">
       <h2>What you pay, and to whom</h2>
       <div class="payrows">
-        <div><b>Held in escrow by a Maltese lawyer</b>When you order, you pay the full <strong>car price, landed in Malta</strong> into the client account of an independent advocate in Malta. It covers the car, shipping and insurance, import duty and VAT. The lawyer releases the money to the seller, Hosokawa Pte. Ltd., only after the car has shipped and the bill of lading is issued. If the car is not shipped on time or fails the SVA inspection, you get a full refund.</div>
+        <div><b>Held in escrow by a Maltese lawyer</b>When you order, you pay the full <strong>car price, landed in Malta</strong> into the client account of an independent advocate in Malta. It covers the car, shipping and insurance, import duty and VAT. The lawyer releases the money to the seller, Hosokawa Pte. Ltd., in one payment, only after you have received the car. If the car is not shipped on time, or cannot be registered in Malta because of a problem with the car, you get a refund.</div>
         <div><b>Paid by you in Malta</b>The <strong>registration costs</strong> shown on each car: registration tax, SVA inspection, plates and local fees, paid directly to the Maltese authorities and providers. These are estimates and may change.</div>
       </div>
     </div>
@@ -298,7 +298,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
 
   <footer>
     <p class="op">Operated by Hosokawa Pte. Ltd. (Singapore) · <a href="https://www.mrlauncher.com/en" target="_blank" rel="noopener">mrlauncher.com</a></p>
-    Demo site. All listings, prices and dates are sample estimates. Products are sold by Hosokawa Pte. Ltd. Cars are supplied, inspected and shipped by our partner Douou Jidosha Co., Ltd. (Sapporo, Japan). Payments for cars are held by a lawyer in Malta until the car ships.
+    Demo site. All listings, prices and dates are sample estimates. Products are sold by Hosokawa Pte. Ltd. Cars are supplied, inspected and shipped by our partner Douou Jidosha Co., Ltd. (Sapporo, Japan). Payments for cars are held by a lawyer in Malta until you receive the car.
   </footer>
 </main>
 
@@ -321,7 +321,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
       <dl class="facts" id="d-facts" hidden></dl>
       <table class="sheet" id="d-sheet"></table>
       <div><div class="note" style="font-weight:700;margin-bottom:6px">If you order today</div><div class="timeline" id="d-timeline"></div></div>
-      <p class="note">Your payment is held by a lawyer in Malta and released to Hosokawa Pte. Ltd. only after the car ships.</p>
+      <p class="note">Your payment is held by a lawyer in Malta and released to Hosokawa Pte. Ltd. only after you receive the car.</p>
     </div>
   </div>
 </div>
@@ -404,9 +404,10 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
     $("#d-timeline").innerHTML =
       `<i></i><span>You pay into the lawyer's escrow account · car reserved</span><span class="d">Day 0</span>`+
       `<i></i><span>Shipping prep and inspection in Japan</span><span class="d">${SHIP[0]}–${SHIP[1]} days</span>`+
-      `<i></i><span>Car ships · escrow released to the seller</span><span class="d">B/L issued</span>`+
+      `<i></i><span>Car ships from Japan</span><span class="d">B/L issued</span>`+
       `<i></i><span>Sea freight, Japan → Malta</span><span class="d">${SEA[0]}–${SEA[1]} days</span>`+
       `<i></i><b>Estimated arrival in Malta</b><span class="d">${fmt(d.arrFrom)} – ${fmt(d.arrTo)}</span>`+
+      `<i></i><span>You receive the car · escrow released to the seller in one payment</span><span class="d">On delivery</span>`+
       `<i></i><span>Customs, registration and plates</span><span class="d">${REG[0]}–${REG[1]} days</span>`+
       `<i style="background:var(--good)"></i><b>Ready to drive</b><span class="d">${fmt(d.roadFrom)} – ${fmt(d.roadTo)}</span>`;
     const gal=$("#gal"), viewer=$("#viewer"), facts=$("#d-facts");
