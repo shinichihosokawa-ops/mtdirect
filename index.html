@@ -4,14 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Malta Direct from Japan: Japanese cars, crafts and food delivered straight to Malta with no dealer in between. Operated by Hosokawa Pte. Ltd.">
-<title>Malta Direct</title>
+<title>MTDirect · Malta Direct from Japan</title>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="img/brand/icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/brand/icon-192.png">
+<link rel="apple-touch-icon" href="img/brand/apple-touch-icon.png">
+<meta name="theme-color" content="#FBFAF8">
+<meta property="og:image" content="https://mtdirect.jp/img/brand/icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap">
 <style>
 /* Layout: gallery-shop — full-bleed photography framed by quiet paper-white space; serif headlines, sans body, one indigo accent and a vermilion seal */
 :root{
   --paper:#FBFAF8; --surface:#FFFFFF; --ink:#1A1D22; --muted:#5F6670; --line:#E6E3DE;
-  --indigo:#22385A; --indigo-ink:#FFFFFF; --indigo-soft:#EEF1F6; --shu:#B9452F;
+  --indigo:#3B465D; --indigo-ink:#FFFFFF; --indigo-soft:#EFF1F5; --shu:#C41A2C;
   --good:#24724A; --warn:#A35A12; --neutral:#7A808A;
   --serif:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",Georgia,serif;
   --sans:"Figtree","Hiragino Sans","Noto Sans JP",system-ui,sans-serif;
@@ -28,6 +34,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
 .seal{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:5px;background:var(--shu);color:#fff;font-family:var(--serif);font-weight:800;font-size:18px;transform:rotate(-4deg)}
+.logo-img{height:54px;width:auto;display:block}
+.logo .logo-tag{border-left:1px solid var(--line);padding-left:12px;line-height:1.35}
+@media (max-width:520px){.logo-img{height:42px}.logo .logo-tag{display:none}}
 .logo b{font-family:var(--serif);font-size:22px;font-weight:800;letter-spacing:.01em}
 .logo small{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .nav{display:flex;flex-wrap:wrap;gap:2px}
@@ -179,7 +188,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
 
 <header class="top">
   <div class="wrap">
-    <a class="logo" href="#home"><span class="seal" aria-hidden="true">日</span><span><b>Malta Direct</b><small>from Japan · mtdirect.jp</small></span></a>
+    <a class="logo" href="#home" aria-label="MTDirect home"><img class="logo-img" src="img/brand/logo.png" alt="MTDirect" width="640" height="156"><small class="logo-tag">Malta Direct<br>from Japan</small></a>
     <nav class="nav" aria-label="Categories">
       <a href="#home" data-route="home">Home</a>
       <a href="#cars" data-route="cars">Cars</a>
@@ -201,7 +210,7 @@ footer .op{color:var(--ink);font-weight:700;margin:0 0 6px}
           <a class="btn" href="#cars">Browse cars</a>
           <a class="btn ghost" href="#other">Request anything from Japan</a>
         </div>
-        <a class="video-link" href="https://drive.google.com/file/d/1jiXIrroQpA24y_8L4xKYyxAmA_RWQ0-y/view?usp=sharing" target="_blank" rel="noopener"><span class="play" aria-hidden="true">&#9654;</span><span class="t">Watch the video: how Malta Direct works</span></a>
+        <a class="video-link" href="https://drive.google.com/file/d/1jiXIrroQpA24y_8L4xKYyxAmA_RWQ0-y/view?usp=sharing" target="_blank" rel="noopener"><span class="play" aria-hidden="true">&#9654;</span><span class="t">Watch the video: how MTDirect works</span></a>
       </div>
       <div class="hero-photo">
         <img src="img/crafts.jpg" alt="Japanese teapots, lacquer bowls, kimono fabric and kitchen knives laid out on a wooden workshop table">
