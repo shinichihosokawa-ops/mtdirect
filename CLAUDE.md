@@ -2,6 +2,11 @@
 
 このリポジトリは MTDirect（日本からマルタへ中古車・工芸品・食品を個人輸入で直送する事業）の公開サイト。**Claude Code の担当はサイトの更新のみ**。価格計算・企画・スプレッドシートは ChatGPT 側で行い、ここには計算済みの値が渡される。
 
+## 引き継ぎ資料（ChatGPTと共有）
+- Google Drive：https://drive.google.com/drive/u/0/folders/1JdXEq6iBraAnzr0tbtJM1GKHbfDk9yi3
+- 01_MTDirect_事業前提書.md／02_スプレッドシート仕様書.md／03_ChatGPTへの指示文.md／mtdirect_在庫価格マスター.xlsx
+- サイト作業の前に、ここで最新の価格・掲載車を確認する。Driveの既存ファイルは上書きできないため、更新するときは日付付きの新しいファイルとして作る（例：01_MTDirect_事業前提書_2026-11-15.md）。最新は日付が一番新しいもの。
+
 ## 公開
 - GitHub Pages（ドメイン mtdirect.jp、CNAMEあり）。`main` に push すると1〜2分で反映。
 - コミットの作者は "Shin Hosokawa" <shinichi.hosokawa@gmail.com>。
